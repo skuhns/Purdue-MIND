@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class exercise_Activity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class exercise_Activity extends AppCompatActivity {
 
         //will be different Read eventually
         rawStream = dummyRead(rawStream);
-        Log.d("raw stream", rawStream.toString());
+        Log.d("raw stream", Arrays.toString(rawStream));
 
         //TODO get REAL data from device and fill array every (realStream.length / 20) seconds
 
@@ -49,7 +50,7 @@ public class exercise_Activity extends AppCompatActivity {
         //TODO after data is put in realStream using parseData, interpret it
         realStream = parseData(realStream,rawStream);
         flag = interpret(realStream);
-        Log.d("realStream", realStream.toString());
+        Log.d("realStream", Arrays.toString(realStream));
         Log.d("flag", Integer.toString(flag));
 
         //TODO create multiple text view representing actions we support and set specific one to visible based on flag
@@ -92,7 +93,7 @@ public class exercise_Activity extends AppCompatActivity {
         for (int i = 0; i < rawStream.length-1; i++) {
             //43 is ascii value for '+' which seperates ints inside raw stream
             if(i%2 == 0 && rawStream[i] != 43) {
-                realStream[i/2] = rawStream[i];
+                realStream[i/2] = rawStream[i] - 48;
             }
         }
         Log.d("success","parseData");
