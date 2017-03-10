@@ -11,7 +11,7 @@
     tools:context="purduecom.sam.mind_app.MainActivity">
 
     <Button
-        android:text="Data"
+        android:text="Exercises"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -31,7 +31,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
-        android:text="Exercises"
+        android:text="Data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
