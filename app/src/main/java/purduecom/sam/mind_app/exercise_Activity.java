@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class exercise_Activity extends AppCompatActivity {
 
@@ -36,17 +35,22 @@ public class exercise_Activity extends AppCompatActivity {
     //TODO This function should begin the input stream from the device to the phone
     //TODO for now, feel free to use dummy data for now to get the functions connected
     public static void beginRead(int[] realStream, char[] rawStream) {
+        Log.d("function", "beginRead");
         int flag = 0;
 
         //will be different Read eventually
         rawStream = dummyRead(rawStream);
+        Log.d("raw stream", rawStream.toString());
 
         //TODO get REAL data from device and fill array every (realStream.length / 20) seconds
 
 
 
         //TODO after data is put in realStream using parseData, interpret it
-        flag = interpret(parseData(realStream,rawStream));
+        realStream = parseData(realStream,rawStream);
+        flag = interpret(realStream);
+        Log.d("realStream", realStream.toString());
+        Log.d("flag", Integer.toString(flag));
 
         //TODO create multiple text view representing actions we support and set specific one to visible based on flag
         switch (flag) {
@@ -55,7 +59,7 @@ public class exercise_Activity extends AppCompatActivity {
                 Log.d("action", "nothing done");
                 break;
             case 1:
-                Log.d("action", "something done");
+                Log.d("action", "2 of same number in a row!");
                 break;
             //ETC
         }
@@ -63,28 +67,42 @@ public class exercise_Activity extends AppCompatActivity {
 
 
     public static int interpret(int[] realStream) {
+        Log.d("function","interpret");
         //after interpretation, flag should be set to an int corresponding with action
         int flag=0;
+
+        //look for patterns (ie 2 of same numbers in a row
+        //make sure you only pass over array 1 time or the runtime of the app will slow drastically
+
+        for (int i = 0; i < realStream.length-1; i++) {
+            if (realStream[i] == realStream[i+1]) {
+                flag = 1;
+            }
+        }
         //TODO interpret data into decisive actions (grip, move finger, etc)
 
+        Log.d("success", "interpret");
         return flag;
     }
 
     //converts the raw stream
     public static int[] parseData(int[] realStream, char[] rawStream){
+        Log.d("function","parseData");
         //
-        for (int i = 0; i < rawStream.length; i++) {
+        for (int i = 0; i < rawStream.length-1; i++) {
             //43 is ascii value for '+' which seperates ints inside raw stream
             if(i%2 == 0 && rawStream[i] != 43) {
                 realStream[i/2] = rawStream[i];
             }
         }
+        Log.d("success","parseData");
         return realStream;
     }
 
     //Fills raw data with fake data
     public static char[] dummyRead(char[] rawStream) {
-        Random rand = null;
+        Log.d("function","dummyRead");
+        Random rand = new Random();
         int temp = 0;
         for(int i = 0; i < rawStream.length; i++){
             if (i % 2 == 0) {
@@ -116,6 +134,7 @@ public class exercise_Activity extends AppCompatActivity {
                 rawStream[i] = '+';
             }
         }
+        Log.d("success", "dummyRead");
         return rawStream;
     }
 
