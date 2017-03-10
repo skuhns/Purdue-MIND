@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     Button gameActivity;
     Button calibrateActivity;
     Button exerciseActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
