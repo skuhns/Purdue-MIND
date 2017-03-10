@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Random;
@@ -14,6 +15,7 @@ public class exercise_Activity extends AppCompatActivity {
 
     //GLOBAL arrays for storing information
 
+    //Size of these arrays is irrelevant, we get a data read every .05s so this is ~50 seconds of data. probably too much
     int[] realStream = new int[1000];
     char[] rawStream = new char[2001];
 
@@ -25,7 +27,7 @@ public class exercise_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        //TODO this will probably crash the app as it is now;
         beginRead(realStream, rawStream);
 
         //TODO Add support for device and reading in data
@@ -35,23 +37,25 @@ public class exercise_Activity extends AppCompatActivity {
     //TODO for now, feel free to use dummy data for now to get the functions connected
     public static void beginRead(int[] realStream, char[] rawStream) {
         int flag = 0;
+
+        //will be different Read eventually
         rawStream = dummyRead(rawStream);
 
         //TODO get REAL data from device and fill array every (realStream.length / 20) seconds
 
 
 
-        //TODO after data is put in realStream using parseData, interpret it!
+        //TODO after data is put in realStream using parseData, interpret it
         flag = interpret(parseData(realStream,rawStream));
 
         //TODO create multiple text view representing actions we support and set specific one to visible based on flag
         switch (flag) {
             //TODO replace prints with displaying stuff in app
             case 0: //nothing is done
-                System.out.println("nothing");
+                Log.d("action", "nothing done");
                 break;
             case 1:
-                System.out.println("finger wiggle or some shit");
+                Log.d("action", "something done");
                 break;
             //ETC
         }
@@ -77,6 +81,8 @@ public class exercise_Activity extends AppCompatActivity {
         }
         return realStream;
     }
+
+    //Fills raw data with fake data
     public static char[] dummyRead(char[] rawStream) {
         Random rand = null;
         int temp = 0;
