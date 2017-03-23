@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -25,9 +26,9 @@ public class exercise_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
-        //TODO this will probably crash the app as it is now;
         beginRead(realStream, rawStream);
 
         //TODO Add support for device and reading in data
@@ -35,7 +36,7 @@ public class exercise_Activity extends AppCompatActivity {
 
     //TODO This function should begin the input stream from the device to the phone
     //TODO for now, feel free to use dummy data for now to get the functions connected
-    public static void beginRead(int[] realStream, char[] rawStream) {
+    public void beginRead(int[] realStream, char[] rawStream) {
         Log.d("function", "beginRead");
         int flag = 0;
 
@@ -55,7 +56,7 @@ public class exercise_Activity extends AppCompatActivity {
 
         //TODO create multiple text view representing actions we support and set specific one to visible based on flag
         switch (flag) {
-            //TODO replace prints with displaying stuff in app
+            //TODO replace logs with displaying stuff in app
             case 0: //nothing is done
                 Log.d("action", "nothing done");
                 break;
@@ -91,8 +92,8 @@ public class exercise_Activity extends AppCompatActivity {
         Log.d("function","parseData");
         //
         for (int i = 0; i < rawStream.length-1; i++) {
-            //43 is ascii value for '+' which seperates ints inside raw stream
-            if(i%2 == 0 && rawStream[i] != 43) {
+            //48 is difference between ascii value for basic ints and actual ints 0-9
+            if(i%2 == 0 && rawStream[i] != '+') {
                 realStream[i/2] = rawStream[i] - 48;
             }
         }
@@ -137,6 +138,11 @@ public class exercise_Activity extends AppCompatActivity {
         }
         Log.d("success", "dummyRead");
         return rawStream;
+    }
+
+    public static void display(int flag) {
+        //Possible option: create array of strings corresponding with flags, then display string
+
     }
 
 }

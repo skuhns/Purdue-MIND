@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         gameActivity = (Button) findViewById(R.id.button);
         calibrateActivity = (Button) findViewById(R.id.button2);
         exerciseActivity = (Button) findViewById(R.id.button3);
+        //TODO: great task is for someone to work on UI here and main_activity.xml
 
         gameActivity.setOnClickListener(new View.OnClickListener() {
             @Override
