@@ -1,16 +1,24 @@
 package purduecom.sam.mind_app;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+
+
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 public class exercise_Activity extends AppCompatActivity {
 
@@ -20,10 +28,26 @@ public class exercise_Activity extends AppCompatActivity {
     int[] realStream = new int[1000];
     char[] rawStream = new char[2001];
 
+
     @Override
     //This block of code gets ran whenever this activity is called by a button or whatever
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+        // Device does not support Bluetooth
+        }
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, 1);
+        }
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                BluetoothDevice mDevice = device;
+            }
+        }
+
         setContentView(R.layout.activity_exercise_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
