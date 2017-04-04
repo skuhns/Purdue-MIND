@@ -1,10 +1,12 @@
 package purduecom.sam.mind_app;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
+import android.widget.ListView;
+import android.content.Intent;
+
+
 
 
 import android.os.Bundle;
@@ -14,13 +16,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
 
 public class exercise_Activity extends AppCompatActivity {
+
+
+
+
 
     //GLOBAL arrays for storing information
 
@@ -28,24 +43,48 @@ public class exercise_Activity extends AppCompatActivity {
     int[] realStream = new int[1000];
     char[] rawStream = new char[2001];
 
+    public exercise_Activity() throws FileNotFoundException {
+    }
+
 
     @Override
     //This block of code gets ran whenever this activity is called by a button or whatever
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-        // Device does not support Bluetooth
+        String FILENAME = "MIND_DATA";
+        String newSession = "New Session: ";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        //File file = new File(context.getFilesDir(), FILENAME);
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_APPEND);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, 1);
+
+        newSession = newSession.concat(dateFormat.format(date) + "\n\n");
+
+        try {
+            fos.write(newSession.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-        if (pairedDevices.size() > 0) {
-            for (BluetoothDevice device : pairedDevices) {
-                BluetoothDevice mDevice = device;
+        String message = "";
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            int size = fis.available();
+            for (int i = 0; i < size; i++) {
+                message = message.concat((char)fis.read() + "");
             }
+            System.out.println("APP USAGE HISTORY");
+            System.out.println(message + "\n");
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         setContentView(R.layout.activity_exercise_);
@@ -168,5 +207,4 @@ public class exercise_Activity extends AppCompatActivity {
         //Possible option: create array of strings corresponding with flags, then display string
 
     }
-
 }
