@@ -14,6 +14,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
         setContentView(R.layout.activity_main);
         gameActivity = (Button) findViewById(R.id.button);
         calibrateActivity = (Button) findViewById(R.id.button2);
