@@ -3,4 +3,6 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_calibrate_">Calibrate_Activity</string>
     <string name="title_activity_exercise_">exercise_Activity</string>
+    <string name="title_activity_blue">blue</string>
+    <string name="title_activity_sp02">SP02</string>
 </resources>

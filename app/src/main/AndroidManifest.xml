@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="purduecom.sam.mind_app">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,9 +29,15 @@
         <activity
             android:name=".exercise_Activity"
             android:label="@string/title_activity_exercise_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".blue"
+            android:label="@string/title_activity_blue"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SP02"
+            android:label="@string/title_activity_sp02"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
 </manifest>

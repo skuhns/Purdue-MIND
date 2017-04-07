@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         exerciseActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Calibrate_Activity.class));
+                startActivity(new Intent(MainActivity.this, blue.class));
             }
         });
 
