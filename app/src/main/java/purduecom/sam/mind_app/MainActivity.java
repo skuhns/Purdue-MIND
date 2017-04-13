@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         gameActivity = (Button) findViewById(R.id.button);
         calibrateActivity = (Button) findViewById(R.id.button2);
         exerciseActivity = (Button) findViewById(R.id.button3);
+
+        gameActivity.setBackgroundColor(0xA3D6D7);
+        calibrateActivity.setBackgroundColor(0xA3D6D7);
+        exerciseActivity.setBackgroundColor(0xA3D6D7);
         //TODO: great task is for someone to work on UI here and main_activity.xml
 
         gameActivity.setOnClickListener(new View.OnClickListener() {
