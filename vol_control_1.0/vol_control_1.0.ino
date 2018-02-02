@@ -1,4 +1,6 @@
-int vol = 0;
+double vol = 0.0;
+double MaxSig = 600.0;
+double Sensitivity = .9;
 
 void setup() {
   pinMode(1,OUTPUT);
@@ -20,7 +22,7 @@ void loop() {
   delay(50);
 
 
-    if (vol < 128) {
+    if (vol < (1/9)*Sensitivity*MaxSig) {
       digitalWrite(1,LOW);
       digitalWrite(2,LOW);
       digitalWrite(3,LOW);
@@ -30,7 +32,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);
     }
-    if (vol>= 128 && vol < 256) {
+    else if (vol>= (1/9)*Sensitivity*MaxSig && vol < (2/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,LOW);
       digitalWrite(3,LOW);
@@ -40,7 +42,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 256 && vol < 384) {
+    else if (vol>= (2/9)*Sensitivity*MaxSig && vol < (3/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,LOW);
@@ -50,7 +52,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 256 && vol < 384) {
+    else if (vol>= (3/9)*Sensitivity*MaxSig && vol < (4/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -60,7 +62,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 384 && vol < 512) {
+    else if (vol>= (4/9)*Sensitivity*MaxSig && vol < (5/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -70,7 +72,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 384 && vol < 512) {
+    else if (vol>= (5/9)*Sensitivity*MaxSig && vol < (6/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -80,7 +82,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 512 && vol < 640) {
+    else if (vol>= (6/9)*Sensitivity*MaxSig && vol < (7/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -90,7 +92,7 @@ void loop() {
       digitalWrite(7,LOW);
       digitalWrite(8,LOW);     
     }
-    if (vol>= 640 && vol < 768) {
+    else if (vol>= (7/9)*Sensitivity*MaxSig && vol < (8/9)*Sensitivity*MaxSig) {
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -100,7 +102,8 @@ void loop() {
       digitalWrite(7,HIGH);
       digitalWrite(8,LOW);     
     }
-    if (vol >= 768 && vol < 896) {
+      else if(vol >= (8.0/9.0)*Sensitivity*MaxSig) {
+      //Serial.println((8.0/9.0)*Sensitivity*MaxSig);
       digitalWrite(1,HIGH);
       digitalWrite(2,HIGH);
       digitalWrite(3,HIGH);
@@ -108,7 +111,7 @@ void loop() {
       digitalWrite(5,HIGH);
       digitalWrite(6,HIGH);
       digitalWrite(7,HIGH);
-      digitalWrite(8,HIGH);     
+      digitalWrite(8,HIGH);    
     }
   
 }
